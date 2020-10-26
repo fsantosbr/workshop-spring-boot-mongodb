@@ -11,7 +11,6 @@ import com.fsantosbr.workshopmongo.domain.Post;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String>{
 	// The Spring data has (already) the MongoRepository<T, ID> interface
-	// The interface expects the domain class it will manage and the type of the Id of the class
-	
+	// The interface expects the domain class it will manage and the type of the Id of the class	
 
 }
