@@ -1,8 +1,11 @@
 package com.fsantosbr.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="user")
@@ -17,6 +20,12 @@ public class User implements Serializable {
 	private String id;
 	private String name;
 	private String email;
+	
+	@DBRef(lazy = true)
+	private List<Post> posts = new ArrayList<>();
+	// Spring Jpa: To set that a collection (in mongoDB) is referring to another collection (mongoDb) we use @DBRef
+	// The '(lazy = true)' parameter sets that this collection will be loaded if (only) called/opened. If we retrieve the users, the collection won't load at first
+	
 	
 	public User() {}
 
@@ -49,6 +58,14 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override
